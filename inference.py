@@ -43,10 +43,11 @@ def main():
         logger.warning("MEMO might not generate full-length video for non-wav audio file.")
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
-    output_video_path = os.path.join(
-        output_dir,
-        f"{os.path.basename(input_image_path).split('.')[0]}_{os.path.basename(input_audio_path).split('.')[0]}.mp4",
-    )
+    # output_video_path = os.path.join(
+    #     output_dir,
+    #     f"{os.path.basename(input_image_path).split('.')[0]}_{os.path.basename(input_audio_path).split('.')[0]}.mp4",
+    # )
+    output_video_path = f"/content/memo-{seed}-tost.mp4"
 
     if os.path.exists(output_video_path):
         logger.info(f"Output file {output_video_path} already exists. Skipping inference.")
