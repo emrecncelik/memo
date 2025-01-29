@@ -28,7 +28,8 @@ def parse_args():
     parser.add_argument("--config", type=str, default="configs/inference.yaml")
     parser.add_argument("--input_image", type=str)
     parser.add_argument("--input_audio", type=str)
-    parser.add_argument("--output_dir", type=str)
+    parser.add_argument("--cache_dir", type=str)
+    parser.add_argument("--output_video_path", type=str)
     parser.add_argument("--seed", type=int, default=42)
 
     return parser.parse_args()
@@ -41,13 +42,7 @@ def main():
     input_audio_path = args.input_audio
     if "wav" not in input_audio_path:
         logger.warning("MEMO might not generate full-length video for non-wav audio file.")
-    output_dir = args.output_dir
-    os.makedirs(output_dir, exist_ok=True)
-    # output_video_path = os.path.join(
-    #     output_dir,
-    #     f"{os.path.basename(input_image_path).split('.')[0]}_{os.path.basename(input_audio_path).split('.')[0]}.mp4",
-    # )
-    output_video_path = f"/content/memo-{args.seed}-tost.mp4"
+    output_video_path = args.outputt_video_path
 
     if os.path.exists(output_video_path):
         logger.info(f"Output file {output_video_path} already exists. Skipping inference.")
@@ -116,7 +111,7 @@ def main():
     )
 
     logger.info(f"Processing audio {input_audio_path}")
-    cache_dir = os.path.join(output_dir, "audio_preprocess")
+    cache_dir = os.path.join(args.cache_dir, "audio_preprocess")
     os.makedirs(cache_dir, exist_ok=True)
     input_audio_path = resample_audio(
         input_audio_path,
