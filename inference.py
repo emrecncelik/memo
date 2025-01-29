@@ -42,7 +42,7 @@ def main():
     input_audio_path = args.input_audio
     if "wav" not in input_audio_path:
         logger.warning("MEMO might not generate full-length video for non-wav audio file.")
-    output_video_path = args.outputt_video_path
+    output_video_path = args.output_video_path
 
     if os.path.exists(output_video_path):
         logger.info(f"Output file {output_video_path} already exists. Skipping inference.")
