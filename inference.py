@@ -139,6 +139,7 @@ def main():
         audio_length=audio_length,
         device=device,
     )
+    audio_emotion = 4 # set neutral
 
     logger.info("Loading models")
     vae = AutoencoderKL.from_pretrained(config.vae).to(device=device, dtype=weight_dtype)
